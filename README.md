@@ -24,7 +24,7 @@ Example valid hierachy to post:
 }
 ```
 
-Server will detect the following invalid scenatios upon posting the hierarchy.
+Server will detect the following invalid scenarios upon posting the hierarchy.
 
 * Multiple root nodes (because there an only be one leader)
 
