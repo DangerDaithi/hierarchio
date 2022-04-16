@@ -1,0 +1,140 @@
+{
+	"info": {
+		"_postman_id": "0bdc733f-e775-440e-a45f-7afb2b68ae5f",
+		"name": "Hierarchio Test Cases",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Hierarchy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"pete\": \"nick\",\r\n    \"barb\": \"nick\",\r\n    \"sophie\": \"jonas\",\r\n    \"nick\": \"sophie\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:7000/hierarchy",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"hierarchy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get hierarchy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/hierarchy",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"hierarchy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Employee Hierarchy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/hierarchy/nick",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"hierarchy",
+						"nick"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Multiple root nodes exception returns 400",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"pete\": \"nick\",\r\n    \"barb\": \"nick\",\r\n    \"sophie\": \"jonas\",\r\n    \"nick\": \"sophie\",\r\n    \"nick\": \"john\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:7000/hierarchy",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"hierarchy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Loop detection exception returns 400",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"pete\": \"nick\",\r\n    \"barb\": \"nick\",\r\n    \"sophie\": \"jonas\",\r\n    \"nick\": \"sophie\",\r\n    \"jonas\": \"pete\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:7000/hierarchy",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"hierarchy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Parsing exception returns 400",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"pete\": \"nick\",\r\n    \"barb\": \"nick\",\r\n    \"sophie\"\"jonas\",\r\n    \"nick\": \"sophie\",\r\n    \"jonas\": \"pete\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:7000/hierarchy",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"hierarchy"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
