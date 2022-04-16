@@ -75,6 +75,9 @@ To run server, navigate to project root directory and run gradle task:
 ```
 gradle runServer
 ```
+
+NOTE! server is currently harded to run on port 7000. Change this in source if you need too (task to pass port from gradle task to server as runtime arg).
+
 ### Testing Program
 
 As stated above, you can run the untit test using gradle test task. Or you can run the unit tests using any Junit5 compatible test runner.
