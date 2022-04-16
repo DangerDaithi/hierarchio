@@ -27,5 +27,14 @@ compileTestKotlin {
 }
 
 application {
-    mainClassName = 'MainKt'
+    mainClassName = 'Server'
+}
+
+tasks.withType<Jar>() {
+    manifest {
+        attributes["Main-Class"] = "org.hierarchio.Server"
+    }
+    configurations["compileClasspath"].forEach { file: File ->
+        from(zipTree(file.absoluteFile))
+    }
 }
