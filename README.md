@@ -7,7 +7,7 @@ Introducing Hierarchio. A simple web service to solve all of your employee hiera
 
 ## Description
 
-Hierarchio exposes a simple restful web API over http. The follow endpoints are available to use:
+Hierarchio exposes a simple restful web API over http. The following endpoints are available to use:
 
 * /hierarchy [POST] - create your employee hierarchy
 * /hierarchy [GET] - get your employee hierarchy
@@ -76,11 +76,11 @@ To run server, navigate to project root directory and run gradle task:
 gradle runServer
 ```
 
-NOTE! server is currently harded to run on port 7000. Change this in source if you need too (task to pass port from gradle task to server as runtime arg).
+NOTE! server is currently hard coded to run on port 7000. Change this in source if you need too (future work to pass port from gradle task to server as runtime arg).
 
 ### Testing Program
 
-As stated above, you can run the untit test using gradle test task. Or you can run the unit tests using any Junit5 compatible test runner.
+As stated above, you can run the unit tests using gradle test task. Or you can run the unit tests using any Junit5 compatible test runner.
 
 To test the endpoints in an integration scenario, find the [Postman](https://www.postman.com/) test case collections in a folder in the root directory called "Test Cases". Import the collection into Postman and run each example test case.
 
