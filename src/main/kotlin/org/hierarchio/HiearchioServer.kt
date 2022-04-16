@@ -18,7 +18,7 @@ class HiearchioServer(private val port: Int, private val repository: HierarchyRe
         }
 
         this.app!!.routes {
-            ApiBuilder.get("/employees") { ctx ->
+            ApiBuilder.get("/hierarchy") { ctx ->
                 var hierarchy = repository.get()
                 if (hierarchy != null) {
                     if (hierarchy.jsonReports == null || hierarchy.jsonReports.entrySet().isEmpty()) {
@@ -32,32 +32,24 @@ class HiearchioServer(private val port: Int, private val repository: HierarchyRe
                 }
             }
 
-            ApiBuilder.get("/employees/{name}") { ctx ->
+            ApiBuilder.get("/hierarchy/{name}") { ctx ->
                 var sanitized = ctx.pathParam("name").replace("\"", "")
                 var employee = repository.get(sanitized)
-                if (employee == null) {
+                if (employee != null) {
+                    var jsonToReturn = StringBuilder()
+                    EmployeeSupervisorResponseBuilder().use {
+                        it.build(employee, jsonToReturn, 2)
+                    }
+                    ctx.json(jsonToReturn.toString())
+                    ctx.status(200)
+                }
+                else{
                     logger.info("Failed to find employee with name ${ctx.pathParam("name")}")
                     ctx.status(404)
-                } else {
-
-                    // todo make this recursive with levels
-                    if(employee.parent?.parent != null){
-
-                        var something = JsonObject()
-                        something.add(employee.id, JsonObject())
-
-                        var anotherSomething = JsonObject()
-                        anotherSomething.add(employee.parent!!.id, something)
-
-                        var toReturn = JsonObject()
-                        toReturn.add(employee.parent!!.parent!!.id, anotherSomething)
-
-                        ctx.json(toReturn.toString())
-                    }
                 }
             }
 
-            ApiBuilder.post("/employees") { ctx ->
+            ApiBuilder.post("/hierarchy") { ctx ->
                 try {
                     val rawHierarchy = ctx.body()
                     var sanitized = rawHierarchy.replace("\"", "").replace("\\s".toRegex(), "")
@@ -66,7 +58,7 @@ class HiearchioServer(private val port: Int, private val repository: HierarchyRe
                     ctx.status(201)
                 } catch (e:java.lang.Exception) {
                     when(e) {
-                        is LoopDetectionException, is ParsingException -> {
+                        is LoopDetectionException, is ParsingException, is MultipleRootNodeException -> {
                             logger.error(e.message)
                             ctx.status(400)
                             ctx.json(e.message.toString())
@@ -78,6 +70,7 @@ class HiearchioServer(private val port: Int, private val repository: HierarchyRe
         this.app!!.start(port)
         logger.info("Server successfully started on port $port")
     }
+
 
     override fun close() {
         app!!.stop()

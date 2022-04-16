@@ -23,7 +23,7 @@ class KeyValueParser{
                     throw ParsingException("Key value pair was not in correct format. Expected 'key':'value', " +
                             "but got $tokenized")
                 }
-                //todo fix this
+
                 var toAdd = Pair(keyToValue[0].replace("'", ""),
                     keyToValue[1].replace("'", ""))
 

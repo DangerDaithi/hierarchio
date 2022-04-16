@@ -2,7 +2,6 @@ package org.hierarchio
 
 import com.google.gson.JsonObject
 
-// todo create unit tests, assert string is exact
 class GsonEmployeeHierarchyResponseBuilder {
     fun build(current: EmployeeNode){
         if(current.children.isNullOrEmpty()){

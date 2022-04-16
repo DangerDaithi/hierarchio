@@ -1,4 +1,3 @@
 # hierarchio
 
-
-##TODO
+Have you ever forgotten your managers 

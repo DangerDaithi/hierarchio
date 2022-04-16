@@ -38,6 +38,7 @@ application {
 }
 
 task runServer(type: JavaExec) {
+
     main = "org.hierarchio.Server"
     classpath = sourceSets.main.runtimeClasspath
 }
