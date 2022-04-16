@@ -85,6 +85,6 @@ To test the endpoints in an integration scenario, find the [Postman](https://www
 Using any gradle compatible IDE such as Jetbrains Intellij, navigate to the project root directory (containing the gradle.build file) and open the folder in the IDE. Run the gradle build task from within the IDE and begin debugging.
 
 ### Todo
-Pass port from gradle task to server as runtime arg
-Save hierarchy to a data store
-Simple token based authentication
+* Pass port from gradle task to server as runtime arg
+* Save hierarchy to a data store
+* Simple token based authentication
