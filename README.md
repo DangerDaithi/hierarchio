@@ -9,9 +9,46 @@ Introducing Hierarchio. A simple web service to solve all of your employee hiera
 
 Hierarchio exposes a simple restful web API over http. The follow endpoints are available to use:
 
-/hierarchy [POST] - create your employee hierarchy
-/hierarchy [GET] - get your employee hierarchy
-/hierarchy/[name] [GET] - get a specific employees hierarchy up to 2 levels
+* /hierarchy [POST] - create your employee hierarchy
+* /hierarchy [GET] - get your employee hierarchy
+* /hierarchy/[name] [GET] - get a specific employees hierarchy up to 2 levels
+
+Example valid hierachy to post: 
+
+```
+{
+    "pete": "nick",
+    "barb": "nick",
+    "sophie": "jonas",
+    "nick": "sophie"
+}
+```
+
+Server will detect the following invalid scenatios upon posting the hierarchy.
+
+* Multiple root nodes (because there an only be one leader)
+
+```
+{
+    "pete": "nick",
+    "barb": "nick",
+    "sophie": "jonas",
+    "nick": "sophie",
+    "nick": "john"
+}
+```
+
+* Employee loop detection (before understanding recursion, you must first understand recursion)
+
+```
+{
+    "pete": "nick",
+    "barb": "nick",
+    "sophie": "jonas",
+    "nick": "sophie",
+    "jonas": "pete"
+}
+```
 
 ## Getting Started
 
