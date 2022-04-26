@@ -4,6 +4,7 @@ Have you ever forgotten your managers name? Have you ever forgotten your manager
 
 Introducing Hierarchio. A simple web service to solve all of your employee hierarchy needs.
 
+![alt text](https://imgflip.com/i/6dw291)
 
 ## Description
 
